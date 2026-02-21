@@ -29,13 +29,7 @@ def generate_sdd_markdown(state: dict) -> str:
     md.append(f"- Fecha: **{today}**\n")
     md.append("## 1. Objetivo\n")
     md.append(state.get("sdd_goal", "Definir un sistema IA operable, medible y gobernable, explicitando trade-offs."))
-    md.append("\n\n## 2. Decisión Final / Trade-offs\n")
-    decision = state.get("decision_final", "")
-    if decision:
-        md.append(f"{decision}\n")
-    else:
-        md.append("- (No especificada)\n")
-    md.append("\n## 3. Simulación Financiera (TI vs SI)\n")
+    md.append("\n\n## 2. Trade-offs TI vs SI (simulación)\n")
     if sim:
         md.append(f"- Modelo/preset: **{sim.get('preset','(n/a)')}**\n")
         md.append(f"- Precio: **{sim.get('eur_por_1k_tokens','?')}€/1k tokens**\n")
