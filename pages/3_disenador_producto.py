@@ -3,7 +3,7 @@ import pandas as pd
 
 st.title("Diseñador de Producto (Wizard)")
 
-steps = ["1) Flujo", "2) Roles", "3) Métricas & Guardrails"]
+steps = ["1) Flujo", "2) Roles", "3) Métricas & Guardrails", "4) Decisión Final"]
 step = st.radio("Paso", steps, horizontal=True)
 
 # --- Paso 1
@@ -53,7 +53,7 @@ elif step == steps[1]:
     st.session_state["roles"] = roles
 
 # --- Paso 3
-else:
+elif step == steps[2]:
     st.subheader("Paso 3 — Métricas y Guardrails (Data & Policy)")
     metrics = st.session_state.get("metrics", {})
     guardrails = st.session_state.get("guardrails", {})
@@ -72,3 +72,11 @@ else:
     st.session_state["metrics"] = metrics
     st.session_state["guardrails"] = guardrails
     st.info("Mínimo exigible: 3 métricas (valor/coste/riesgo) + 1 SLO con umbral numérico.")
+
+# --- Paso 4
+else:
+    st.subheader("Paso 4 — Decisión Final")
+    st.markdown("Escribe aquí la decisión final sobre el modelo/pipeline elegido y sus trade-offs explícitos (máx ~150 palabras).")
+    decision_final = st.text_area("Justificación del diseño", value=st.session_state.get("decision_final", ""), height=150)
+    st.session_state["decision_final"] = decision_final
+    st.info("Ejemplo: 'Se optó por GPT-4o-mini con RAG y HITL porque el trade-off operativo (menor €/token) permite asumir el coste de validación humana para asegurar 0% fuga de PII.'")
